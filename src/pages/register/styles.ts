@@ -31,6 +31,7 @@ export const Title = styled.p`
   color: #ffffff;
   text-align: center;
   margin-bottom: 8px;
+  margin-top: 54px;
 `;
 
 export const SubTitle = styled(Title)`
@@ -78,16 +79,12 @@ export const Select = styled.select<InputProps>`
   height: 56px;
   font-size: 14px;
   width: 100%;
-  padding: 0 16px;
+  padding:  0 16px;
 
   option {
     padding: 16px;
     background: #202020;
     height: 300px;
-  }
-
-  &:before {
-    margin-top: 100px;
   }
 `;
 

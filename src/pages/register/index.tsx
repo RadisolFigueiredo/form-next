@@ -67,7 +67,7 @@ const Register = () => {
         <S.FirstColumn>
           <S.BoxRegister>
             <S.BoxForm>
-              <S.Title style={{ marginTop: 54 }}>Cadastre-se</S.Title>
+              <S.Title>Cadastre-se</S.Title>
               <S.SubTitle>Para começar, insira os dados abaixo:</S.SubTitle>
               <S.Form onSubmit={handleSubmit(registerUser)}>
                 <S.Input
@@ -76,14 +76,14 @@ const Register = () => {
                   type='text'
                   placeholder='Nome'
                 />
-                <S.Span>{errors.firstName && 'Campo Obrigatório'}</S.Span>
+                <S.Span>{errors.firstName && 'Nome Inválido'}</S.Span>
                 <S.Input
                   error={!!errors.lastName}
                   {...register('lastName', { required: true })}
                   type='text'
                   placeholder='Sobrenome'
                 />
-                <S.Span>{errors.lastName && 'Campo Obrigatório'}</S.Span>
+                <S.Span>{errors.lastName && 'Sobrenome Inválido'}</S.Span>
 
                 <S.Input
                   error={!!errors.email}
@@ -91,7 +91,7 @@ const Register = () => {
                   type='email'
                   placeholder='E-mail'
                 />
-                <S.Span>{errors.email && 'Campo Obrigatório'}</S.Span>
+                <S.Span>{errors.email && 'E-mail Inválido'}</S.Span>
 
                 <S.Input
                   error={!!errors.dateOfBirthday}
@@ -101,7 +101,9 @@ const Register = () => {
                   type='date'
                   placeholder='Data de nascimento'
                 />
-                <S.Span>{errors.dateOfBirthday && 'Campo Obrigatório'}</S.Span>
+                <S.Span>
+                  {errors.dateOfBirthday && 'Data de nascimento Inválida'}
+                </S.Span>
 
                 <S.Input
                   error={!!errors.password}
@@ -109,9 +111,15 @@ const Register = () => {
                   placeholder='Senha'
                   {...register('password', {
                     required: true,
+                    minLength: 6,
                   })}
                 />
-                <S.Span>{errors.password && 'Campo Obrigatório'}</S.Span>
+
+                <S.Span>
+                  {errors.password?.type === 'required' && 'Senha Inválida'}
+                  {errors.password?.type === 'minLength' &&
+                    'Senha precisa ter no mínimo 6 caracteres'}
+                </S.Span>
 
                 <S.Select
                   error={!!errors.country}
@@ -119,12 +127,8 @@ const Register = () => {
                 >
                   <option value=''>Selecione seu país</option>
                   <option value='brasil'>Brasil</option>
-                  <option selected value='estados unidos'>
-                    Estados Unidos
-                  </option>
-                  <option selected value='inglaterra'>
-                    Inglaterra
-                  </option>
+                  <option value='estados unidos'>Estados Unidos</option>
+                  <option value='inglaterra'>Inglaterra</option>
                 </S.Select>
                 <S.Span>{errors.country && 'Campo Obrigatório'}</S.Span>
                 <S.Input
